@@ -1,0 +1,255 @@
+\documentclass[12pt]{article}
+%\usepackage[landscape]{geometry}  
+\usepackage[landscape,hmargin=2cm,vmargin=1.5cm,headsep=0cm]{geometry} 
+% See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{multicol}
+
+\usepackage{framed}
+
+\newcommand{\vect}[1]{\vec{#1}}
+
+
+\usepackage[table]{xcolor}
+
+\newcommand\x{\times}
+\newcommand\y{\cellcolor{green!10}}
+
+
+\newcommand{\argmin}{\arg\!\min}
+\newcommand{\argmax}{\arg\!\max}
+
+
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}
+
+\newtheorem{fact}{Fact}
+
+\newtheorem{proposition}{Proposition}
+
+
+% Turn off header and footer
+\pagestyle{plain}
+\bibliographystyle{plain}
+
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+%% taken from http://brunoj.wordpress.com/2009/10/08/latex-the-framed-minipage/
+\newsavebox{\fmbox}
+\newenvironment{fmpage}[1]
+{\begin{lrbox}{\fmbox}\begin{minipage}{#1}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\fmbox}}}
+
+\usepackage{mathtools}
+\makeatletter
+ 
+\newcommand{\explain}[2]{\underset{\mathclap{\overset{\uparrow}{#2}}}{#1}}
+\newcommand{\explainup}[2]{\overset{\mathclap{\underset{\downarrow}{#2}}}{#1}}
+ 
+\makeatother
+
+
+\title{Ordinary Differential Equations Summary Sheet}
+\author{Shravan Vasishth (vasishth@uni-potsdam.de)}
+%\date{}                                           % Activate to display a given date or no date
+
+
+
+
+\begin{document}
+
+\footnotesize
+\maketitle
+\tableofcontents
+
+\newpage
+
+\begin{multicols}{2}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \normalsize{Ordinary Differential Equations Summary Sheet} \\
+    \footnotesize{
+    Compiled by: Shravan Vasishth (vasishth@uni-potsdam.de)\\
+    Version dated: \today}
+\end{center}
+
+<<setup,echo=F>>=
+options(width=60)
+options(continue=" ")
+@
+
+These are notes from a Coursera course on ODEs: Introduction to Ordinary Differential Equations, by Korea Advanced Institute of Science and Technology.
+The hyphenated numbers in brackets refer to lecture id's.
+
+IVP means initial value problem, and DE means differential equation. Whenever a constant appears, I will just call it c or give it a numerical subscript, and keep increasing the subscript if for example exponentiating it leads to another constant.
+
+Good references are:
+
+\begin{enumerate}
+\item A fantastic introductory book is \cite{tenenbaum1985ordinary}. It is however very very long.
+\item A faster-paced (shorter), beautifully written book is \cite{simmons2016differential}. I love this mathematician's writing style, he is a true artist.
+\end{enumerate}
+
+The impression I got from this course was that there is a bag of tricks for solving ODEs, and one needs to know which ``template'' to use. There didn't seem to be a single unifying framework.
+
+\section{Separable DEs [2-1, 2-2]}
+
+These are equations of the form:
+
+\begin{equation}
+y' = g(x) h(x)
+\end{equation}
+
+Let $q(y) = \frac{1}{h(x)}$. Then, 
+
+\begin{equation}
+y' = \frac{dy}{dx} = g(x)\frac{1}{q(y)} 
+\end{equation}
+
+Rearrange the terms and integrate both sides:
+
+\begin{equation}
+q(y) dy = g(x) dx \Rightarrow \int q(y) dy = \int g(x) dx
+\Rightarrow Q(y) = G(x) + c
+\end{equation}
+
+\subsection{Example 1} 
+
+Solve $y' = \frac{x+1}{y^2}$.
+
+\begin{equation}
+y' = \frac{dy}{dx} = \frac{x+1}{y^2}  \Rightarrow y^2 dy = (x+1) dx
+\end{equation}
+
+Integrate both sides to get: $y^2/3 + c_1 = x^2/2 + x + c2$. Then solve for $y$.
+
+\subsection{Example 2} 
+
+Solve the IVP $y'=\frac{y-1}{2-x}; y(-1)=2$.
+
+\begin{equation}
+y' = \frac{dy}{dx} = \frac{y-1}{2-x}  \Rightarrow \frac{1}{y-1} dy = \frac{1}{2-x} dx
+\end{equation}
+
+Integrate both sides to get: $ \log \mid y-1 \mid = -\log \mid 2-x\mid + c_1$. 
+
+Take exponents and solve for y: 
+$\mid y-1 \mid = \exp(c_1)\exp(-\log \mid 2-x\mid ) = \frac{c_2}{\mid x - 2\mid}$.
+
+So: $ y-1 = \frac{c_2}{ x - 2}$. Consider the IVP now to solve for $c_1$.
+
+$ y-1 = \frac{c_2}{ x - 2} \Rightarrow 2-1 = \frac{c_2}{ -1 - 2}  \Rightarrow c_2 = -3$.
+
+Solution: $ y = \frac{-3}{ x - 2} + 1$.
+
+\section{Separable and linear equations continued [2-3]}
+
+\subsection{Example 3}
+
+Solve: $(3x^2 + 2x -1) dx = (\sin y + \exp(-y)) dy$.
+
+Integrate both sides: $x^3 + x^2 - x + c = - \cos y - \exp(-y)$.
+
+This is an implicit form of a general solution, not solvable explicitly for y.
+
+\subsection{Example 4}
+
+Solve: $y' y^2 -1 $.
+
+$y' = \frac{dy}{dx} = y^2-1 \Rightarrow \frac{1}{y^2 -1} dy = dx$.
+
+Decompose using partial fractions: $\frac{1}{y^2 -1} = \frac{1}{2}\left(\frac{1}{y -1} - \frac{1}{y +1} \right)$.
+
+So we have a separable equation that is easy to solve (by integrating):
+
+$dx = \frac{1}{2}\left(\frac{1}{y -1} - \frac{1}{y +1} \right) dy \Rightarrow  \hbox{Integrate: } 2x + c = \log \mid \frac{y-1}{y +1} \mid $.
+
+Taking exponents, we get: $\frac{y-1}{y +1} = c\cdot \exp(2x)$. Now just solve for y:
+
+$y = \frac{1 + c\exp(2x)}{1-c\exp(2x)}$
+
+\section{Integrating factors}
+
+\underline{Linear equations}
+
+$a_1 (x) y' a_0 (x) y = g(x)$
+
+If $g(x)=0$, the equation is homogeneous (henceforth, hom.).
+
+\underline{Standard form of linear equations}:
+
+Let: $p(x) = \frac{a_0(x)}{a_1(x)} \quad q(x)=\frac{g(x)}{a_1(x)}$
+
+The standard form is: $y' + p(x) y = q(x)$. If $p(x)=0$, then 
+$y(x) = \int q(x) dx + c$ is a general solution.
+
+
+\underline{Integrating factor}:
+
+Suppose we are given a DE in the form:
+
+$y' + p(x)y = q(x)$. 
+
+We are going to solve this DE by multiplying it by a factor $\mu(x)$ that makes the equation separable. This factor is called the integrating factor (IF).
+
+Multiply by IF:
+
+$\mu(x)y' + \mu(x)p(x)y = \mu(x)q(x)$. 
+
+We want to choose $\mu(x)$ such that we can get the following equation to hold:
+
+
+
+\end{multicols}
+
+\bibliography{/Users/shravanvasishth/Dropbox/Bibliography/bibcleaned}
+
+\end{document}
+
