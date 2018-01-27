@@ -12,6 +12,8 @@
 \usepackage{epstopdf}
 \usepackage{multicol}
 
+\usepackage{cancel}
+
 \usepackage{framed}
 
 \newcommand{\vect}[1]{\vec{#1}}
@@ -245,6 +247,214 @@ $\mu(x)y' + \mu(x)p(x)y = \mu(x)q(x)$.
 
 We want to choose $\mu(x)$ such that we can get the following equation to hold:
 
+$\mu(x)y' + \mu(x)p(x)y = (\mu(x)y)'$. 
+
+Note here that: $(\mu(x)y)' = \mu(x)'y + \mu(x)y'$ (product rule). So, equating the LHS and the RHS of the two equations above, we get
+
+\begin{equation}
+(\mu(x)y)' = \cancel{\mu(x)y'} + \mu(x)p(x)y =  \cancel{\mu(x)y'} + \mu(x)p(x)y
+\end{equation}
+
+Canceling the common terms, we get:
+
+$\mu(x)p(x)\cancel{y} = \mu(x)p(x)\cancel{y} = \mu(x)p(x) = \mu(x)p(x)$
+
+So, we are looking for some function $\mu$ such that 
+
+$\mu(x)' = p(x)\mu(x)$
+
+The above DE is separable, so we can solve it in the usual way:
+
+$\mu(x)' = \frac{d(\mu(x))}{dx}= p(x)\mu(x) \Rightarrow \frac{d(\mu(x))}{\mu}= p(x)d(x)$
+
+Integrate both sides and exponentiate:
+
+$\exp(\log(\mid \mu\mid = \exp\left(\int p(x) dx\right)$
+
+This gives us: $\mu = \exp\left(\int p(x) dx\right)$. In other words:
+
+$\mu(x) = \exp\left(\int p(x) dx\right)$
+
+So, the method is:
+
+\begin{enumerate}
+\item Multiply $y' + p(x)y = q(x)$ by $\mu(x)$
+\item $(\mu(x)y)' = \mu(x)p(x)$
+\item This equation has the general solution:
+
+$y(x) = \frac{1}{\mu(x)}\left(\int \mu(x) p(x) dx\right) + c$
+\end{enumerate}
+
+$\mu(x)$ is called the integrating factor for the DE.
+
+\section{Exact equations}
+
+\subsection{Example}
+
+Solve IVP $y' + \explain{\frac{3}{x}y}{p(x)} = \explain{\frac{1}{x^2}}{q(x)}; y(1)=\frac{1}{2}$.
+
+
+Multiply by integrating factor:
+
+$\mu(x) = \exp\left(\int p(x)dx\right) = \exp\left(\int \frac{3}{x}dx\right) = \exp\left(3 \log x\right) = \exp\left(\log x^3\right) = x^3$.
+
+So, multiply DE with IF:
+
+$x^3y' + x^3\frac{3}{x}y = x^3\frac{1}{x^2} = $
+
+We can rewrite this as: 
+
+$x^3(y' + \frac{3}{x}y) = x = $; this \textit{should} equal $(x^3y)'$ (check this)
+
+So we have:
+
+$x = (x^3y)' \explain{\Rightarrow}{\hbox{Integrate both sides}} \frac{x^2}{2} + c = x^3y $
+
+Divide both sides by $x^3$:
+
+$y=\frac{1}{2x} + \frac{c}{x^3}$.
+
+Now, if $x=1$, $y=1/2$, so we have
+
+$1/2=\frac{1}{2} + \frac{c}{1^3} \Rightarrow c=0$.
+
+Hence, $y = \frac{1}{2x}$.
+
+
+\begin{theorem}
+Let 
+$y' = p(x)y = q(x); y(x_0) = y_0$
+
+p, q continuous on (a,b). Then, for any $x_0$ on (a,b)
+and any $y_0$ the DE has a unique solution $\phi(x)$.
+
+\end{theorem}
+
+\subsection{Example}
+
+$xy' + (1+x)y = exp(-x) \cos 3x$
+
+This DE is not in standard form. But if we divide by $x$, it is now in standard form:
+
+$y' + \frac{(1+x)}{x}y = \frac{\exp(-x) \cos 3x}{x}$
+
+Next, compute the IF: 
+
+$\mu(x) = \exp\left(\int p(x) dx\right) = \exp\left(\int \frac{1+x}{x} dx\right) = \exp\left(\int (\frac{1}{x} + 1) dx\right) = \exp(\log x) \exp(x) = x\exp(x)$.
+
+It follows that $(x\exp(x) y)' = \cos 3x$. Integrate both sides:
+
+$x\exp(x) y) = \frac{1}{3}\sin 3x \Rightarrow y = \frac{1}{3} \sin 3x \frac{1}{x\exp(x)}$
+
+\section{Solving non-exact DEs using the IF [3-1]}
+
+Suppose we have a DE $M(x,y) dx + N(x,y) dy = 0$.
+
+If it is non-exact, then we can get an exact DE by multiplying it by the IE:
+
+$\mu M dx + \mu N dy = 0$
+
+where $\mu$ is $\mu(x,y)$ is the integrating factor.
+
+To check exactness, check this equality: $\frac{\delta M}{\delta y} \equiv\frac{\delta N}{\delta x}$
+
+If this equality hold, the DE is exact.
+
+Now, $\exists F(x,y)$ whose $\frac{\delta F}{\delta x} = M$ and $\frac{\delta F}{\delta y} = N$.
+
+So, $\frac{\delta F}{\delta y} = N \Rightarrow$ integrate to get $F(x,y) = \int f(x,y)dy + g(x)$.
+
+Now, we have a candidate $F(x,y)$. Take $\frac{\delta F}{\delta x} = \frac{d(\int \cdot dy)}{dx} + g'(x)$. Now compute $g(x)+c$.
+
+Using initial value, find c. 
+
+The above steps can be done with $\frac{\delta F}{\delta x} = M$, mutatis mutandis.
+
+\subsection{How to find the integrating factor}
+
+Let $\mu(x,y)$ be the IF of
+$M(x,y) dx + N(x,y) dy= 0$.
+
+By Theorem 2.2 (in lectures, not in these notes), we have $\frac{\delta \mu M}{\delta y}=\frac{\delta \mu N}{\delta x}$.
+
+By the product rule, we have 
+
+$\frac{M\delta \mu }{\delta y}-\frac{N\delta \mu }{\delta x} = \mu(\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y})$.
+
+This is a partial differential equation for $\mu$; it's hard to solve. But if $\mu$ depends only on x or y, we can solve it easily.
+
+If $\mu$ depends only on y, $\frac{\delta M}{\delta x} = 0$.
+
+If $\mu$ depends only on x, $\frac{\delta M}{\delta y} = 0$.
+
+So, when $\mu(x,y)=\mu(x)$, $\frac{\delta \mu}{\delta x} = \left[\frac{1}{N}\left(\frac{\delta M}{\delta y} - \frac{\delta N}{\delta x}\right)\mu\right]$.
+
+When $\mu(x,y)=\mu(y)$, $\frac{\delta \mu}{\delta y} = \left[\frac{1}{M}\left(\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y}\right)\mu\right]$.
+
+This is a theorem.
+
+\subsection{Theorem 2.3}
+
+Consider a non-exact DE $M(x,y)dx + N(x,y)dy = 0$.
+
+If $\left[\frac{1}{N}\left(\frac{\delta M}{\delta y} - \frac{\delta N}{\delta x}\right)\mu\right]$ depends only on x, then
+
+$\mu(x) = \exp\left( \int \left[\frac{1}{N}\left(\frac{\delta M}{\delta y} - \frac{\delta N}{\delta x}\right)\mu\right] \right)$
+is an integrating factor of the DE.
+
+If $\frac{\delta \mu}{\delta y} = \left[\frac{1}{M}\left(\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y}\right)\mu\right]$ depends only on y,  then
+
+$\mu(y) = \exp\left(\int \left[\frac{1}{M}\left(\frac{\delta N}{\delta x} - \frac{\delta M}{\delta y}\right)\mu\right] \right)$.
+
+Note that $y' = f(x)y \Rightarrow y = c\exp(f(x)dx)$.
+
+\section{Substitutions}
+
+This is applicable when the DE is not linear, separable, or exact.
+
+\subsection{Example}
+
+$x \explain{\exp(y)}{u} y' + \explain{\exp(y)}{u} = \cos x$
+
+If $u = \exp(y)$ then $u' \exp(y)y'$.
+
+Therefore, $xu' + u = (xu)' = \cos x$.
+
+Integrating both sides: $(xu)= x \exp(y) = \sin x + c$. 
+
+This is a general solution.
+
+\section{Homogeneous equation}
+
+\subsection{Example}
+
+$f(x,y) = x^2 - 2xy + 3y^2$ is homogeneous.
+
+Let $x = tx, y = ty$.
+
+Then, $f(x,y) = x^2 - 2xy + 3y^2 = (tx)^2 - 2(txty) + 3(ty)^2$.
+
+This simplifies to: $t^2(x^2 -2xy+3y2)$.
+
+Therefore, we can write $f(x,y) = f(tx,ty)
+t^\alpha (f(x,y))$.
+
+The above is the definition of a homogeneous DE.
+
+A DE $M(x,y)dx + N(x,y)dy = 0$ if both M and N are homogeneous to the same degree.
+
+Suppose now that M,N are homogeneous to degree $\alpha$ [3-5].
+
+Let $u = \frac{y}{x} \Rightarrow u x \Rightarrow dy = u dx + x du$ (product rule).
+
+Now, substitute $M(x,\explain{y}{xu})dx + N(x,\explain{y}{xu})\explain{dy}{u dx + x du} = 0$.
+
+This allows us to write:
+$M(x,xu)dx + N(x,xu)(udx + x du) = 0$.
+
+Due to homogeneity at $x^\alpha$ for both M and N, we can write
+
+$x^\alpha[M(1,u)dx + N(1,y)(udx + x du)] = 0$
 
 
 \end{multicols}
