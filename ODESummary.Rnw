@@ -456,6 +456,70 @@ Due to homogeneity at $x^\alpha$ for both M and N, we can write
 
 $x^\alpha[M(1,u)dx + N(1,y)(udx + x du)] = 0$
 
+So divide throughout by $x^\alpha$, 
+
+$[M(2,u) + uN(2,u)]dx + x N du = 0$ 
+
+This is now separable!
+
+$\frac{1}{x} dx + \frac{N(1,u)}{M(1,u) + u N(1,u)}du = 0$
+
+Similarly, $v=\frac{x}{y}$ also leads to separable equations.
+
+If $M(x,y) dx + N(x,y) dy = 0$, where M,N are homogeneous with degree $x^\alpha$.
+
+We can write:
+
+$\frac{dy}{dx} = - \frac{M(x,y)}{N(x,y)} = \frac{x^\alpha M(1,x/y)}{x^\alpha N(1,x/y)}$
+
+It follows that $dy/dx$ is a function of only $y/x$:
+
+$\frac{dy}{dx} = - \frac{M(1,y/x)}{N(1,y/x)}$ 
+
+This is a characteristic property of homogeneous equations.
+
+The converse is also true: if $\frac{dy}{dx} = -\frac{M(x,y)}{N(x,y)} = f(y/x)$, then thi DE is homogeneous.
+
+\subsection{Example}
+
+$\frac{dy}{dx} = \frac{y^2-x^2}{xy} = \frac{y}{x} - \frac{x}{y} = f(y/x) = f(t) = t-\frac{1}{t}$.
+
+Set $u= \frac{y}{x} \Rightarrow y = xu; y' = u + xu'$.
+
+$y' u + xu' = u - \frac{1}{u} \hfill (u = y/x)$ 
+
+This is separable! $\int u du = \int -\frac{1}{x} dx$.
+
+\begin{equation}
+\begin{split}
+\frac{u^2}{2} =& - \log x + c_1\\
+u^2 =& - \log x^2 + c_2\\
+(\frac{y}{x})^2 =& - \log x^2 + c_2\\
+y2^2 =& x^2(c_2-\log x^2)\\
+\end{split}
+\end{equation}
+
+This is a general solution.
+
+This approach generalizes. 
+Consider an equation of the form:
+
+$y' = f(ax + by); b\neq 0$
+
+Let $u = ax + by$. Then $u' = b(f(u)) + a$. This is separable because
+
+$u = ax + by \Rightarrow u'= a + by'$.
+
+$y' = \frac{u' - a}{b} = f(u) \Rightarrow bf(u_ + a u'= y$
+
+\begin{equation}
+\begin{split}
+\frac{dy}{dx} =& u' = b(f(u)) + a\\
+\frac{1}{b(f(u))+a} du = dx} \hbox{ Separable!}
+\end{split}
+\end{equation}
+
+\subsection{Example}
 
 \end{multicols}
 
